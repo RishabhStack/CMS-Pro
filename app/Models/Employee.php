@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasCompanyTrait;
 use App\Traits\HasCreatorTrait;
@@ -10,7 +11,7 @@ use App\Traits\HasStatusTrait;
 
 class Employee extends Model
 {
-    use SoftDeletes, HasCompanyTrait, HasCreatorTrait, HasStatusTrait;
+    use SoftDeletes, Auditable, HasCompanyTrait, HasCreatorTrait, HasStatusTrait;
 
     protected $fillable = [
         'company_id',
@@ -23,6 +24,7 @@ class Employee extends Model
         'joining_date',
         'confirmation_date',
         'exit_date',
+        'date_of_birth',
         'employment_type',
         'work_shift',
         'work_location',
@@ -42,6 +44,7 @@ class Employee extends Model
         'joining_date' => 'date',
         'confirmation_date' => 'date',
         'exit_date' => 'date',
+        'date_of_birth' => 'date',
     ];
 
     public function getFullNameAttribute(): string

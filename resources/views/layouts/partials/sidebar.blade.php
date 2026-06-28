@@ -116,10 +116,140 @@
                 </a>
             </li>
 
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link {{ request()->routeIs('performance-reviews.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#performanceMenu">
+                    <i class="bi bi-star"></i>
+                    <span>Performance</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul class="nav sub-menu collapse {{ request()->routeIs('performance-reviews.*') ? 'show' : '' }}" id="performanceMenu">
+                    <li>
+                        <a href="{{ route('performance-reviews.index') }}" class="nav-link {{ request()->routeIs('performance-reviews.*') ? 'active' : '' }}">
+                            <span>Reviews</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link {{ request()->routeIs('timesheets.*') || request()->routeIs('projects.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#timesheetMenu">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Timesheets</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul class="nav sub-menu collapse {{ request()->routeIs('timesheets.*') || request()->routeIs('projects.*') ? 'show' : '' }}" id="timesheetMenu">
+                    <li>
+                        <a href="{{ route('timesheets.index') }}" class="nav-link {{ request()->routeIs('timesheets.*') ? 'active' : '' }}">
+                            <span>Time Entries</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('projects.index') }}" class="nav-link {{ request()->routeIs('projects.*') ? 'active' : '' }}">
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link {{ request()->routeIs('expenses.*') || request()->routeIs('expense-categories.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#expenseMenu">
+                    <i class="bi bi-currency-dollar"></i>
+                    <span>Expenses</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul class="nav sub-menu collapse {{ request()->routeIs('expenses.*') || request()->routeIs('expense-categories.*') ? 'show' : '' }}" id="expenseMenu">
+                    <li>
+                        <a href="{{ route('expenses.index') }}" class="nav-link {{ request()->routeIs('expenses.*') && !request()->routeIs('expense-categories.*') ? 'active' : '' }}">
+                            <span>Claims</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('expense-categories.index') }}" class="nav-link {{ request()->routeIs('expense-categories.*') ? 'active' : '' }}">
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link {{ request()->routeIs('assets.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#assetMenu">
+                    <i class="bi bi-laptop"></i>
+                    <span>Assets</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul class="nav sub-menu collapse {{ request()->routeIs('assets.*') ? 'show' : '' }}" id="assetMenu">
+                    <li>
+                        <a href="{{ route('assets.index') }}" class="nav-link {{ request()->routeIs('assets.*') ? 'active' : '' }}">
+                            <span>All Assets</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-submenu">
+                <a href="#" class="nav-link {{ request()->routeIs('shifts.*') || request()->routeIs('shift-assignments.*') || request()->routeIs('shift-swaps.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#shiftMenu">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Shifts</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul class="nav sub-menu collapse {{ request()->routeIs('shifts.*') || request()->routeIs('shift-assignments.*') || request()->routeIs('shift-swaps.*') ? 'show' : '' }}" id="shiftMenu">
+                    <li>
+                        <a href="{{ route('shifts.index') }}" class="nav-link {{ request()->routeIs('shifts.*') ? 'active' : '' }}">
+                            <span>Shift Types</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shift-assignments.index') }}" class="nav-link {{ request()->routeIs('shift-assignments.*') ? 'active' : '' }}">
+                            <span>Roster</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('shift-swaps.index') }}" class="nav-link {{ request()->routeIs('shift-swaps.*') ? 'active' : '' }}">
+                            <span>Swap Requests</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('travel-requests.index') }}" class="nav-link {{ request()->routeIs('travel-requests.*') ? 'active' : '' }}">
+                    <i class="bi bi-airplane"></i>
+                    <span>Travel</span>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a href="{{ route('announcements.index') }}" class="nav-link {{ request()->routeIs('announcements.*') ? 'active' : '' }}">
                     <i class="bi bi-megaphone"></i>
                     <span>Announcements</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('orgchart.index') }}" class="nav-link {{ request()->routeIs('orgchart.*') ? 'active' : '' }}">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Org Chart</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('tickets.index') }}" class="nav-link {{ request()->routeIs('tickets.*') ? 'active' : '' }}">
+                    <i class="bi bi-ticket-perforated"></i>
+                    <span>Helpdesk</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('exit-management.index') }}" class="nav-link {{ request()->routeIs('exit-management.*') ? 'active' : '' }}">
+                    <i class="bi bi-door-open"></i>
+                    <span>Exit Management</span>
                 </a>
             </li>
 
@@ -137,7 +267,21 @@
                         <span>Role Management</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('audit-logs.index') }}" class="nav-link {{ request()->routeIs('audit-logs.*') ? 'active' : '' }}">
+                        <i class="bi bi-journal-text"></i>
+                        <span>Audit Logs</span>
+                    </a>
+                </li>
             @endif
+
+            <li class="nav-item">
+                <a href="{{ route('help') }}" class="nav-link {{ request()->routeIs('help') ? 'active' : '' }}">
+                    <i class="bi bi-question-circle"></i>
+                    <span>Help</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </aside>

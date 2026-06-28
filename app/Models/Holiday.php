@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasCompanyTrait;
 use App\Traits\HasCreatorTrait;
@@ -10,7 +11,7 @@ use App\Traits\HasStatusTrait;
 
 class Holiday extends Model
 {
-    use SoftDeletes, HasCompanyTrait, HasCreatorTrait, HasStatusTrait;
+    use SoftDeletes, Auditable, HasCompanyTrait, HasCreatorTrait, HasStatusTrait;
 
     protected $fillable = [
         'company_id',

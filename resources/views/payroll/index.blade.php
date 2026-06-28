@@ -8,13 +8,15 @@
         <h5 class="card-title mb-0">Payroll Management</h5>
         <div class="d-flex gap-2">
             <select id="filterMonth" class="form-select" style="width: auto;">
+                <option value="">All Months</option>
                 @foreach(range(1, 12) as $m)
-                    <option value="{{ $m }}" {{ $m == date('m') ? 'selected' : '' }}>{{ date('F', mktime(0, 0, 0, $m, 1)) }}</option>
+                    <option value="{{ $m }}">{{ date('F', mktime(0, 0, 0, $m, 1)) }}</option>
                 @endforeach
             </select>
             <select id="filterYear" class="form-select" style="width: auto;">
+                <option value="">All Years</option>
                 @foreach($years as $year)
-                    <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>{{ $year }}</option>
+                    <option value="{{ $year }}">{{ $year }}</option>
                 @endforeach
             </select>
             <select id="filterStatus" class="form-select" style="width: auto;">

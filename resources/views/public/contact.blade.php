@@ -87,6 +87,12 @@
         </div>
     </div>
 </section>
+
+<section class="py-3 bg-dark text-white text-center">
+    <div class="container">
+        <small>Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
+    </div>
+</section>
 @endsection
 
 @push('scripts')

@@ -31,7 +31,7 @@
                 <div class="position-relative">
                     <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
                         <div class="card-body p-0">
-                            <img src="https://placehold.co/600x400/4f46e5/ffffff?text=HRMS+Dashboard" alt="HRMS Dashboard" class="img-fluid">
+                            <img src="{{ asset('images/dashboard.png') }}" alt="HRMS Dashboard" class="img-fluid">
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 translate-middle-y ms-n4">
@@ -253,6 +253,12 @@
                 <p class="small text-muted mt-3"><i class="bi bi-shield-check me-1"></i> No credit card required. 14-day free trial.</p>
             </div>
         </div>
+    </div>
+</section>
+
+<section class="py-3 bg-dark text-white text-center">
+    <div class="container">
+        <small>Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
     </div>
 </section>
 @endsection

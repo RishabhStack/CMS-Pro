@@ -101,7 +101,7 @@
                     <small class="text-white-50">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</small>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
-                    <small class="text-white-50">Made with <i class="bi bi-heart-fill text-danger"></i> for modern HR teams</small>
+                    <small class="text-white-50">Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
                 </div>
             </div>
         </div>

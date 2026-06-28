@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('joining_date')->nullable();
             $table->date('confirmation_date')->nullable();
             $table->date('exit_date')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('employment_type')->default('permanent');
             $table->string('work_shift')->default('general');
             $table->string('work_location')->nullable();

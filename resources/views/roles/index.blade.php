@@ -51,11 +51,14 @@
                         : '<span class="badge bg-danger">Inactive</span>';
                 }},
                 { data: null, name: 'action', orderable: false, searchable: false, render: function(data, type, row) {
-                    return '<div class=\"btn-group btn-group-sm\">' +
+                    let buttons = '<div class=\"btn-group btn-group-sm\">' +
                         '<button class=\"btn btn-info\" onclick=\"openEditModal(' + row.id + ')\" title=\"Edit\"><i class=\"bi bi-pencil\"></i></button>' +
-                        '<button class=\"btn btn-warning\" onclick=\"managePermissions(' + row.id + ')\" title=\"Permissions\"><i class=\"bi bi-shield\"></i></button>' +
-                        '<button class=\"btn btn-danger\" onclick=\"deleteRole(' + row.id + ')\" title=\"Delete\"><i class=\"bi bi-trash\"></i></button>' +
-                        '</div>';
+                        '<button class=\"btn btn-warning\" onclick=\"managePermissions(' + row.id + ')\" title=\"Permissions\"><i class=\"bi bi-shield\"></i></button>';
+                    if (!row.is_system) {
+                        buttons += '<button class=\"btn btn-danger\" onclick=\"deleteRole(' + row.id + ')\" title=\"Delete\"><i class=\"bi bi-trash\"></i></button>';
+                    }
+                    buttons += '</div>';
+                    return buttons;
                 } }
             ],
             responsive: true,
@@ -110,8 +113,9 @@
                 roleTable.draw();
                 App.toast('Role deleted successfully', 'success');
             },
-            error: function () {
-                App.toast('Error deleting role', 'error');
+            error: function (xhr) {
+                const msg = xhr.responseJSON?.message || 'Error deleting role';
+                App.toast(msg, 'error');
             }
         });
     });

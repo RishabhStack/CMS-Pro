@@ -241,6 +241,76 @@
         </div>
     @endif
 </div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-cake2 me-1 text-danger"></i> Upcoming Birthdays</h5>
+            </div>
+            <div class="card-body p-0">
+                @if($upcomingBirthdays->count())
+                    <div class="list-group list-group-flush">
+                        @foreach($upcomingBirthdays as $emp)
+                            <div class="list-group-item px-3 py-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width:34px;height:34px;font-size:0.8rem;">
+                                        <i class="bi bi-cake2"></i>
+                                    </span>
+                                    <div class="flex-grow-1">
+                                        <strong class="small">{{ $emp->full_name }}</strong>
+                                        <br>
+                                        <small class="text-muted">{{ $emp->date_of_birth?->format('d M') ?? 'N/A' }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-4">
+                        <i class="bi bi-cake2 fs-2 text-muted"></i>
+                        <p class="text-muted mb-0 small mt-1">No upcoming birthdays</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-gift me-1 text-warning"></i> Work Anniversaries</h5>
+            </div>
+            <div class="card-body p-0">
+                @if($upcomingAnniversaries->count())
+                    <div class="list-group list-group-flush">
+                        @foreach($upcomingAnniversaries as $emp)
+                            <div class="list-group-item px-3 py-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-warning bg-opacity-10 text-warning" style="width:34px;height:34px;font-size:0.8rem;">
+                                        <i class="bi bi-gift"></i>
+                                    </span>
+                                    <div class="flex-grow-1">
+                                        <strong class="small">{{ $emp->full_name }}</strong>
+                                        <br>
+                                        <small class="text-muted">
+                                            {{ $emp->joining_date?->format('d M') ?? 'N/A' }}
+                                            &middot; {{ $emp->joining_date?->diffInYears(today()) ?? 0 }} year{{ $emp->joining_date && $emp->joining_date->diffInYears(today()) != 1 ? 's' : '' }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-4">
+                        <i class="bi bi-gift fs-2 text-muted"></i>
+                        <p class="text-muted mb-0 small mt-1">No anniversaries this month</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')

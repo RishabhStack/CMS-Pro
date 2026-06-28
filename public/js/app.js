@@ -402,6 +402,8 @@ window.App = {
                             firstError.focus();
                             firstError[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
+                    } else {
+                        App.error(data?.message || 'An error occurred.');
                     }
 
                     if (opts.error) opts.error(data);

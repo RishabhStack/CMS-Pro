@@ -155,6 +155,15 @@ class RoleController extends BaseController
                 return $this->error('You cannot delete your own role.', null, 403);
             }
 
+            $userCount = $role->users()->count();
+            if ($userCount > 0) {
+                return $this->error(
+                    "Cannot delete role \"{$role->name}\" because {$userCount} user(s) are assigned to it. Please reassign these users to another role first.",
+                    null,
+                    400
+                );
+            }
+
             $this->authorize('delete', $role);
             $this->roleService->destroy($role);
 

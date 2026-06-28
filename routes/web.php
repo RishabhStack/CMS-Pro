@@ -22,6 +22,21 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\ShiftAssignmentController;
+use App\Http\Controllers\ShiftSwapRequestController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\OrgChartController;
+use App\Http\Controllers\ExitManagementController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PerformanceReviewController;
+use App\Http\Controllers\TravelRequestController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\AuditLogController;
 
 // Public Website Routes
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -212,14 +227,110 @@ Route::middleware(['auth', 'company', 'company.context'])->group(function () {
         Route::delete('{id}', [AnnouncementController::class, 'destroy'])->name('destroy');
     });
 
+    // Expense Categories
+    Route::prefix('expense-categories')->name('expense-categories.')->group(function () {
+        Route::get('/', [ExpenseCategoryController::class, 'index'])->name('index');
+        Route::get('list', [ExpenseCategoryController::class, 'list'])->name('list');
+        Route::get('create', [ExpenseCategoryController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [ExpenseCategoryController::class, 'edit'])->name('edit');
+        Route::post('/', [ExpenseCategoryController::class, 'store'])->name('store');
+        Route::put('{id}', [ExpenseCategoryController::class, 'update'])->name('update');
+        Route::delete('{id}', [ExpenseCategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Expenses
+    Route::prefix('expenses')->name('expenses.')->group(function () {
+        Route::get('/', [ExpenseController::class, 'index'])->name('index');
+        Route::get('list', [ExpenseController::class, 'list'])->name('list');
+        Route::get('create', [ExpenseController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [ExpenseController::class, 'edit'])->name('edit');
+        Route::get('{id}', [ExpenseController::class, 'show'])->name('show');
+        Route::post('/', [ExpenseController::class, 'store'])->name('store');
+        Route::put('{id}', [ExpenseController::class, 'update'])->name('update');
+        Route::delete('{id}', [ExpenseController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/approve', [ExpenseController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [ExpenseController::class, 'reject'])->name('reject');
+        Route::post('{id}/pay', [ExpenseController::class, 'pay'])->name('pay');
+    });
+
+    // Assets
+    Route::prefix('assets')->name('assets.')->group(function () {
+        Route::get('/', [AssetController::class, 'index'])->name('index');
+        Route::get('list', [AssetController::class, 'list'])->name('list');
+        Route::get('create', [AssetController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [AssetController::class, 'edit'])->name('edit');
+        Route::get('{id}', [AssetController::class, 'show'])->name('show');
+        Route::get('{id}/assign-form', [AssetController::class, 'assignForm'])->name('assign-form');
+        Route::get('{id}/return-form', [AssetController::class, 'returnForm'])->name('return-form');
+        Route::post('/', [AssetController::class, 'store'])->name('store');
+        Route::put('{id}', [AssetController::class, 'update'])->name('update');
+        Route::delete('{id}', [AssetController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/assign', [AssetController::class, 'assign'])->name('assign');
+        Route::post('{id}/return', [AssetController::class, 'returnAsset'])->name('return');
+    });
+
     // Calendar
     Route::prefix('calendar')->name('calendar.')->group(function () {
         Route::get('/', [CalendarController::class, 'index'])->name('index');
         Route::get('events', [CalendarController::class, 'events'])->name('events');
     });
 
+    // Reports
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])->name('index');
+        Route::get('attendance-trend', [ReportController::class, 'attendanceTrend'])->name('attendance-trend');
+        Route::get('leave-trend', [ReportController::class, 'leaveTrend'])->name('leave-trend');
+        Route::get('payroll-summary', [ReportController::class, 'payrollSummary'])->name('payroll-summary');
+        Route::get('headcount', [ReportController::class, 'headcount'])->name('headcount');
+        Route::get('turnover-rate', [ReportController::class, 'turnoverRate'])->name('turnover-rate');
+        Route::post('save', [ReportController::class, 'saveReport'])->name('save');
+        Route::get('saved', [ReportController::class, 'savedReports'])->name('saved');
+    });
+
+    // Org Chart
+    Route::prefix('org-chart')->name('orgchart.')->group(function () {
+        Route::get('/', [OrgChartController::class, 'index'])->name('index');
+        Route::get('data', [OrgChartController::class, 'data'])->name('data');
+    });
+
     // Help
     Route::get('help', [HelpController::class, 'index'])->name('help');
+
+    // Audit Logs
+    Route::prefix('audit-logs')->name('audit-logs.')->group(function () {
+        Route::get('/', [AuditLogController::class, 'index'])->name('index');
+        Route::get('list', [AuditLogController::class, 'list'])->name('list');
+    });
+
+    // Exit Management
+    Route::prefix('exit-management')->name('exit-management.')->group(function () {
+        Route::get('/', [ExitManagementController::class, 'index'])->name('index');
+        Route::get('list', [ExitManagementController::class, 'list'])->name('list');
+        Route::get('{id}/edit', [ExitManagementController::class, 'edit'])->name('edit');
+        Route::get('{id}', [ExitManagementController::class, 'show'])->name('show');
+        Route::post('/', [ExitManagementController::class, 'store'])->name('store');
+        Route::put('{id}', [ExitManagementController::class, 'update'])->name('update');
+        Route::delete('{id}', [ExitManagementController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/approve', [ExitManagementController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [ExitManagementController::class, 'reject'])->name('reject');
+        Route::post('clear-item/{id}', [ExitManagementController::class, 'clearItem'])->name('clear-item');
+        Route::post('{id}/interview', [ExitManagementController::class, 'saveInterview'])->name('save-interview');
+    });
+
+    // Tickets
+    Route::prefix('tickets')->name('tickets.')->group(function () {
+        Route::get('/', [TicketController::class, 'index'])->name('index');
+        Route::get('list', [TicketController::class, 'list'])->name('list');
+        Route::get('{id}', [TicketController::class, 'show'])->name('show');
+        Route::post('/', [TicketController::class, 'store'])->name('store');
+        Route::put('{id}', [TicketController::class, 'update'])->name('update');
+        Route::delete('{id}', [TicketController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/assign', [TicketController::class, 'assign'])->name('assign');
+        Route::post('{id}/comment', [TicketController::class, 'addComment'])->name('add-comment');
+        Route::post('{id}/resolve', [TicketController::class, 'resolve'])->name('resolve');
+        Route::post('{id}/close', [TicketController::class, 'close'])->name('close');
+        Route::post('{id}/reopen', [TicketController::class, 'reopen'])->name('reopen');
+    });
 
     // Settings
     Route::prefix('settings')->name('settings.')->group(function () {
@@ -228,5 +339,97 @@ Route::middleware(['auth', 'company', 'company.context'])->group(function () {
         Route::post('theme', [SettingController::class, 'theme'])->name('theme');
         Route::post('clear-cache', [SettingController::class, 'clearCache'])->name('clear-cache');
         Route::delete('delete-account/{id}', [SettingController::class, 'deleteAccount'])->name('delete-account');
+    });
+
+    // Performance Reviews
+    Route::prefix('performance-reviews')->name('performance-reviews.')->group(function () {
+        Route::get('/', [PerformanceReviewController::class, 'index'])->name('index');
+        Route::get('list', [PerformanceReviewController::class, 'list'])->name('list');
+        Route::get('create', [PerformanceReviewController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [PerformanceReviewController::class, 'edit'])->name('edit');
+        Route::get('{id}', [PerformanceReviewController::class, 'show'])->name('show');
+        Route::post('/', [PerformanceReviewController::class, 'store'])->name('store');
+        Route::put('{id}', [PerformanceReviewController::class, 'update'])->name('update');
+        Route::delete('{id}', [PerformanceReviewController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/goals', [PerformanceReviewController::class, 'goals'])->name('goals.store');
+        Route::put('{id}/goals', [PerformanceReviewController::class, 'goals'])->name('goals.update');
+        Route::delete('{id}/goals', [PerformanceReviewController::class, 'goals'])->name('goals.destroy');
+        Route::post('{id}/submit', [PerformanceReviewController::class, 'submitForReview'])->name('submit');
+        Route::post('{id}/complete', [PerformanceReviewController::class, 'completeReview'])->name('complete');
+    });
+
+    // Travel Requests
+    Route::prefix('travel-requests')->name('travel-requests.')->group(function () {
+        Route::get('/', [TravelRequestController::class, 'index'])->name('index');
+        Route::get('list', [TravelRequestController::class, 'list'])->name('list');
+        Route::get('create', [TravelRequestController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [TravelRequestController::class, 'edit'])->name('edit');
+        Route::get('{id}', [TravelRequestController::class, 'show'])->name('show');
+        Route::post('/', [TravelRequestController::class, 'store'])->name('store');
+        Route::put('{id}', [TravelRequestController::class, 'update'])->name('update');
+        Route::delete('{id}', [TravelRequestController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/approve', [TravelRequestController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [TravelRequestController::class, 'reject'])->name('reject');
+        Route::post('{id}/submit', [TravelRequestController::class, 'submit'])->name('submit');
+    });
+
+    // Shifts
+    Route::prefix('shifts')->name('shifts.')->group(function () {
+        Route::get('/', [ShiftController::class, 'index'])->name('index');
+        Route::get('list', [ShiftController::class, 'list'])->name('list');
+        Route::get('create', [ShiftController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [ShiftController::class, 'edit'])->name('edit');
+        Route::get('{id}', [ShiftController::class, 'show'])->name('show');
+        Route::post('/', [ShiftController::class, 'store'])->name('store');
+        Route::put('{id}', [ShiftController::class, 'update'])->name('update');
+        Route::delete('{id}', [ShiftController::class, 'destroy'])->name('destroy');
+    });
+
+    // Shift Assignments
+    Route::prefix('shift-assignments')->name('shift-assignments.')->group(function () {
+        Route::get('/', [ShiftAssignmentController::class, 'index'])->name('index');
+        Route::get('list', [ShiftAssignmentController::class, 'list'])->name('list');
+        Route::get('{id}', [ShiftAssignmentController::class, 'show'])->name('show');
+        Route::post('/', [ShiftAssignmentController::class, 'store'])->name('store');
+        Route::post('bulk-store', [ShiftAssignmentController::class, 'bulkStore'])->name('bulk-store');
+        Route::put('{id}', [ShiftAssignmentController::class, 'update'])->name('update');
+        Route::delete('{id}', [ShiftAssignmentController::class, 'destroy'])->name('destroy');
+    });
+
+    // Shift Swap Requests
+    Route::prefix('shift-swaps')->name('shift-swaps.')->group(function () {
+        Route::get('/', [ShiftSwapRequestController::class, 'index'])->name('index');
+        Route::get('list', [ShiftSwapRequestController::class, 'list'])->name('list');
+        Route::get('create', [ShiftSwapRequestController::class, 'create'])->name('create');
+        Route::post('/', [ShiftSwapRequestController::class, 'store'])->name('store');
+        Route::post('{id}/approve', [ShiftSwapRequestController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [ShiftSwapRequestController::class, 'reject'])->name('reject');
+        Route::delete('{id}', [ShiftSwapRequestController::class, 'destroy'])->name('destroy');
+    });
+
+    // Projects
+    Route::prefix('projects')->name('projects.')->group(function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('index');
+        Route::get('list', [ProjectController::class, 'list'])->name('list');
+        Route::get('create', [ProjectController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [ProjectController::class, 'edit'])->name('edit');
+        Route::get('{id}', [ProjectController::class, 'show'])->name('show');
+        Route::post('/', [ProjectController::class, 'store'])->name('store');
+        Route::put('{id}', [ProjectController::class, 'update'])->name('update');
+        Route::delete('{id}', [ProjectController::class, 'destroy'])->name('destroy');
+    });
+
+    // Timesheets
+    Route::prefix('timesheets')->name('timesheets.')->group(function () {
+        Route::get('/', [TimesheetController::class, 'index'])->name('index');
+        Route::get('list', [TimesheetController::class, 'list'])->name('list');
+        Route::get('create', [TimesheetController::class, 'create'])->name('create');
+        Route::get('{id}/edit', [TimesheetController::class, 'edit'])->name('edit');
+        Route::get('{id}', [TimesheetController::class, 'show'])->name('show');
+        Route::post('/', [TimesheetController::class, 'store'])->name('store');
+        Route::put('{id}', [TimesheetController::class, 'update'])->name('update');
+        Route::delete('{id}', [TimesheetController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/approve', [TimesheetController::class, 'approve'])->name('approve');
+        Route::post('{id}/reject', [TimesheetController::class, 'reject'])->name('reject');
     });
 });

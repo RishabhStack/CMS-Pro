@@ -109,22 +109,41 @@ class DashboardController extends BaseController
                     ->take(6)
                     ->get();
 
-                $employmentTypes = Employee::byCompany($companyId)
-                    ->active()
-                    ->select('employment_type', DB::raw('count(*) as total'))
-                    ->groupBy('employment_type')
-                    ->get()
-                    ->map(fn($e) => [
-                        'type' => str_replace('_', ' ', ucfirst($e->employment_type ?? 'unknown')),
-                        'count' => $e->total,
-                    ]);
+            $employmentTypes = Employee::byCompany($companyId)
+                ->active()
+                ->select('employment_type', DB::raw('count(*) as total'))
+                ->groupBy('employment_type')
+                ->get()
+                ->map(fn($e) => [
+                    'type' => str_replace('_', ' ', ucfirst($e->employment_type ?? 'unknown')),
+                    'count' => $e->total,
+                ]);
 
-                return $this->view('dashboard.index', compact(
-                    'totalEmployees', 'todayAttendance', 'onLeave', 'notMarked',
-                    'pendingLeaves', 'weeklyTrend', 'departmentStats', 'maxDeptCount',
-                    'newHires', 'anniversaries', 'employmentTypes',
-                    'upcomingHolidays', 'announcements'
-                ));
+            $upcomingBirthdays = Employee::byCompany($companyId)
+                ->active()
+                ->whereHas('user')
+                ->whereIn(DB::raw("MONTH(date_of_birth)"), [now()->month, now()->addMonth()->month])
+                ->with('user')
+                ->orderByRaw("DAY(date_of_birth)")
+                ->take(10)
+                ->get();
+
+            $upcomingAnniversaries = Employee::byCompany($companyId)
+                ->active()
+                ->whereHas('user')
+                ->whereMonth('joining_date', now()->month)
+                ->with('user')
+                ->orderByRaw("DAY(joining_date)")
+                ->take(5)
+                ->get();
+
+            return $this->view('dashboard.index', compact(
+                'totalEmployees', 'todayAttendance', 'onLeave', 'notMarked',
+                'pendingLeaves', 'weeklyTrend', 'departmentStats', 'maxDeptCount',
+                'newHires', 'anniversaries', 'employmentTypes',
+                'upcomingHolidays', 'announcements',
+                'upcomingBirthdays', 'upcomingAnniversaries'
+            ));
             }
 
             $todayStat = Attendance::byCompany($companyId)
@@ -164,9 +183,28 @@ class DashboardController extends BaseController
                 ->take(3)
                 ->get() : collect();
 
+            $upcomingBirthdays = Employee::byCompany($companyId)
+                ->active()
+                ->whereHas('user')
+                ->whereIn(DB::raw("MONTH(date_of_birth)"), [now()->month, now()->addMonth()->month])
+                ->with('user')
+                ->orderByRaw("DAY(date_of_birth)")
+                ->take(10)
+                ->get();
+
+            $upcomingAnniversaries = Employee::byCompany($companyId)
+                ->active()
+                ->whereHas('user')
+                ->whereMonth('joining_date', now()->month)
+                ->with('user')
+                ->orderByRaw("DAY(joining_date)")
+                ->take(5)
+                ->get();
+
             return $this->view('dashboard.employee', compact(
                 'employee', 'myAttendance', 'myLeaves', 'myUpcomingLeaves',
-                'upcomingHolidays', 'announcements', 'todayStat', 'todayOnLeave'
+                'upcomingHolidays', 'announcements', 'todayStat', 'todayOnLeave',
+                'upcomingBirthdays', 'upcomingAnniversaries'
             ));
         } catch (\Exception $e) {
             return $this->error('Failed to load dashboard.', $e->getMessage());

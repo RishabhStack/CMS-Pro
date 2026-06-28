@@ -241,3 +241,47 @@ if (!function_exists('timeAgo')) {
         return \Carbon\Carbon::parse($date)->diffForHumans();
     }
 }
+
+if (!function_exists('logAudit')) {
+    function logAudit(string $event, $model, ?array $oldValues = null, ?array $newValues = null): void
+    {
+        try {
+            if (!auth()->check()) return;
+
+            $sensitiveKeys = ['password', 'password_confirmation', 'remember_token', 'api_token', 'secret', 'token', 'preshared_key'];
+
+            $filteredOld = $oldValues;
+            if ($filteredOld) {
+                foreach ($sensitiveKeys as $key) {
+                    if (isset($filteredOld[$key])) {
+                        $filteredOld[$key] = '[REDACTED]';
+                    }
+                }
+            }
+
+            $filteredNew = $newValues;
+            if ($filteredNew) {
+                foreach ($sensitiveKeys as $key) {
+                    if (isset($filteredNew[$key])) {
+                        $filteredNew[$key] = '[REDACTED]';
+                    }
+                }
+            }
+
+            \App\Models\AuditLog::create([
+                'company_id' => auth()->user()->company_id,
+                'user_id' => auth()->id(),
+                'event' => $event,
+                'auditable_type' => get_class($model),
+                'auditable_id' => $model->id ?? $model,
+                'old_values' => $filteredOld ? json_encode($filteredOld) : null,
+                'new_values' => $filteredNew ? json_encode($filteredNew) : null,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'created_by' => auth()->id(),
+            ]);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::warning('Failed to create audit log: ' . $e->getMessage());
+        }
+    }
+}

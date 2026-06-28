@@ -207,6 +207,9 @@ class DemoDataSeeder extends Seeder
             'Employees', 'Departments', 'Designations', 'Attendance', 'Leaves',
             'Leave Types', 'Holidays', 'Payroll', 'Documents', 'Announcements',
             'Salary Components', 'Settings', 'Reports',
+            'Performance Reviews', 'Expenses', 'Expense Categories',
+            'Assets', 'Shifts', 'Shift Swaps', 'Timesheets', 'Projects',
+            'Travel', 'Exit Management', 'Helpdesk',
         ])->pluck('id')->toArray();
         $adminRole->permissions()->attach($adminGroupPerms);
 
@@ -215,6 +218,17 @@ class DemoDataSeeder extends Seeder
             'view_employees', 'view_attendance', 'view_leaves', 'apply_leaves',
             'view_holidays', 'view_documents', 'upload_documents', 'download_documents',
             'view_announcements', 'view_leave_types', 'view_salary_components', 'view_payroll',
+            'view_performance_reviews', 'create_performance_reviews',
+            'view_expenses', 'create_expenses', 'edit_expenses',
+            'view_expense_categories',
+            'view_assets',
+            'view_shifts',
+            'view_shift_swaps', 'create_shift_swaps',
+            'view_timesheets', 'create_timesheets', 'edit_timesheets',
+            'view_projects',
+            'view_travel_requests', 'create_travel_requests', 'edit_travel_requests',
+            'view_exit_management', 'create_resignations',
+            'view_tickets', 'create_tickets', 'edit_tickets',
         ];
         $empPerms = Permission::whereIn('slug', $empSlugs)->pluck('id')->toArray();
         $employeeRole->permissions()->attach($empPerms);
@@ -223,6 +237,13 @@ class DemoDataSeeder extends Seeder
         // 7. USERS & EMPLOYEES
         // ====================================================================
         $now = Carbon::now();
+
+        $birthDates = [
+            '1978-04-15', '1985-08-22', '1992-12-03', '1990-06-18', '1993-02-28',
+            '1988-11-10', '1995-07-05', '1982-03-25', '1998-09-14', '1991-01-20',
+            '1986-10-08', '1994-05-30', '1997-08-12', '1989-04-04', '1983-07-22',
+            '1987-11-15', '1999-03-08', '1984-06-28', '1981-09-01', '1992-12-18',
+        ];
 
         $people = [
             // Owner
@@ -281,6 +302,7 @@ class DemoDataSeeder extends Seeder
                 'status_id' => $statusModel->id,
                 'joining_date' => $joiningDate,
                 'confirmation_date' => $statusName === 'Active' ? Carbon::parse($joiningDate)->addMonths(6) : null,
+                'date_of_birth' => $birthDates[$i] ?? null,
                 'employment_type' => $p[6],
                 'work_shift' => 'General',
                 'work_location' => 'San Francisco Office',
@@ -642,6 +664,345 @@ class DemoDataSeeder extends Seeder
                 'status' => 'published',
             ]);
         }
+
+        // ====================================================================
+        // 16. EXPENSE CATEGORIES
+        // ====================================================================
+        $expenseCatData = [
+            ['Travel', 'Travel expenses including flights, hotels, and transportation'],
+            ['Meals & Entertainment', 'Business meals and client entertainment'],
+            ['Office Supplies', 'Office stationery and supplies'],
+            ['Technology', 'Software licenses, hardware, and IT equipment'],
+            ['Transportation', 'Local transportation and fuel'],
+            ['Training & Development', 'Courses, workshops, and certifications'],
+        ];
+        $expenseCats = [];
+        foreach ($expenseCatData as $ec) {
+            $cat = \App\Models\ExpenseCategory::create([
+                'company_id' => $company->id,
+                'name' => $ec[0],
+                'description' => $ec[1],
+                'status' => 'active',
+            ]);
+            $expenseCats[$ec[0]] = $cat;
+        }
+
+        // ====================================================================
+        // 17. SHIFTS
+        // ====================================================================
+        $shiftData = [
+            ['Morning Shift', '06:00', '15:00', 'Morning hours', '#3b82f6'],
+            ['Day Shift', '09:00', '18:00', 'Standard day hours', '#10b981'],
+            ['Evening Shift', '14:00', '23:00', 'Evening hours', '#f59e0b'],
+            ['Night Shift', '22:00', '07:00', 'Night hours', '#8b5cf6'],
+            ['Flexible', '08:00', '17:00', 'Core hours 10am-4pm', '#ec4899'],
+        ];
+        $shifts = [];
+        foreach ($shiftData as $s) {
+            $shift = \App\Models\Shift::create([
+                'company_id' => $company->id,
+                'name' => $s[0],
+                'slug' => Str::slug($s[0]) . '-' . $company->id,
+                'start_time' => $s[1],
+                'end_time' => $s[2],
+                'description' => $s[3],
+                'color' => $s[4],
+                'status' => 'active',
+            ]);
+            $shifts[$s[0]] = $shift;
+        }
+
+        // ====================================================================
+        // 18. SHIFT ASSIGNMENTS (sample)
+        // ====================================================================
+        $shiftNames = array_keys($shifts);
+        foreach ($activeEmployees->take(10) as $i => $emp) {
+            $start = $now->copy()->subMonths(2);
+            $end = $now->copy()->addMonths(1);
+            $date = $start->copy();
+            while ($date->lte($end)) {
+                if (!$date->isWeekend()) {
+                    \App\Models\ShiftAssignment::create([
+                        'employee_id' => $emp->id,
+                        'shift_id' => $shifts[$shiftNames[$i % count($shiftNames)]]->id,
+                        'date' => $date->copy(),
+                    ]);
+                }
+                $date->addDay();
+            }
+        }
+
+        // ====================================================================
+        // 19. ASSET ASSIGNMENTS (sample, after assets are created)
+        // ====================================================================
+
+        // ====================================================================
+        // 20. TICKETS (sample)
+        // ====================================================================
+        $ticketSubjects = [
+            'Cannot login to email',
+            'VPN access not working',
+            'Need new laptop charger',
+            'Software license request',
+            'Office access card not working',
+        ];
+        $ticketDescriptions = [
+            'I am unable to log in to my work email since yesterday. Getting an authentication error.',
+            'VPN connection keeps dropping every few minutes. Need urgent assistance.',
+            'My laptop charger stopped working. Need a replacement ASAP.',
+            'Requesting approval to purchase a new license for Adobe Creative Suite.',
+            'My access card is not working at the main entrance. Please re-activate.',
+        ];
+        $ticketStatuses = ['open', 'in_progress', 'resolved'];
+        foreach ($activeEmployees->take(5) as $i => $emp) {
+            $ticket = \App\Models\Ticket::create([
+                'company_id' => $company->id,
+                'employee_id' => $emp->id,
+                'ticket_number' => 'TKT-' . str_pad($i + 1, 4, '0', STR_PAD_LEFT),
+                'assigned_to' => $activeEmployees->random()->user_id,
+                'subject' => $ticketSubjects[$i],
+                'description' => $ticketDescriptions[$i],
+                'category' => 'general',
+                'priority' => ['low', 'medium', 'high'][$i % 3],
+                'status' => $ticketStatuses[$i % 3],
+            ]);
+            \App\Models\TicketComment::create([
+                'ticket_id' => $ticket->id,
+                'user_id' => $activeEmployees->random()->user_id,
+                'comment' => 'We are looking into this issue. Will update shortly.',
+                'is_internal' => false,
+            ]);
+        }
+
+        // ====================================================================
+        // 19. EXPENSES (sample)
+        // ====================================================================
+        $expenseDescriptions = [
+            'Flight tickets for client meeting',
+            'Team lunch at restaurant',
+            'Office chair replacement',
+            'Software subscription renewal',
+            'Taxi fare to airport',
+            'Hotel booking for conference',
+            'Client dinner',
+            'Printer ink cartridges',
+            'AWS cloud hosting',
+            'Uber rides - client visits',
+        ];
+        $expEmployees = $activeEmployees->take(6);
+        foreach ($expEmployees as $emp) {
+            for ($m = 0; $m < 3; $m++) {
+                $numExpenses = mt_rand(1, 3);
+                for ($e = 0; $e < $numExpenses; $e++) {
+                    $cat = $expenseCats[array_rand($expenseCats)];
+                    $expDate = $now->copy()->subMonths($m)->subDays(mt_rand(1, 28));
+                    $statuses = ['pending', 'approved', 'paid', 'rejected'];
+                    $status = $statuses[array_rand($statuses)];
+                    \App\Models\Expense::create([
+                        'company_id' => $company->id,
+                        'employee_id' => $emp->id,
+                        'category_id' => $cat->id,
+                        'description' => $expenseDescriptions[array_rand($expenseDescriptions)] . ' - ' . $emp->user->first_name,
+                        'amount' => mt_rand(20, 5000) + 0.99,
+                        'expense_date' => $expDate,
+                        'status' => $status,
+                        'approved_by' => in_array($status, ['approved', 'paid']) ? $activeEmployees->first()->user_id : null,
+                        'approved_at' => in_array($status, ['approved', 'paid']) ? $expDate->copy()->addDays(mt_rand(1, 5)) : null,
+                    ]);
+                }
+            }
+        }
+
+        // ====================================================================
+        // 20. ASSETS (sample)
+        // ====================================================================
+        $assetData = [
+            ['MacBook Pro 16"', 'laptop', 'APPLE-MBP-001', 'Apple', 'A2485'],
+            ['Dell UltraSharp Monitor 27"', 'monitor', 'DELL-U27-001', 'Dell', 'U2723QE'],
+            ['Logitech MX Master 3S', 'mouse', 'LOG-MX3-001', 'Logitech', 'MX3S'],
+            ['Samsung 27" Curved Monitor', 'monitor', 'SAM-C27-001', 'Samsung', 'C27F390'],
+            ['iPhone 15 Pro', 'mobile', 'APPLE-IP15-001', 'Apple', 'A3101'],
+        ];
+        $createdAssets = [];
+        foreach ($assetData as $ad) {
+            $createdAssets[] = \App\Models\Asset::create([
+                'company_id' => $company->id,
+                'name' => $ad[0],
+                'type' => $ad[1],
+                'serial_number' => $ad[2],
+                'brand' => $ad[3],
+                'model' => $ad[4],
+                'purchase_date' => $now->copy()->subMonths(mt_rand(1, 12)),
+                'purchase_cost' => mt_rand(100, 3000) + 0.99,
+                'status' => 'available',
+            ]);
+        }
+
+        // Assign first 3 assets to employees
+        foreach ($activeEmployees->take(3) as $i => $emp) {
+            $asset = $createdAssets[$i] ?? null;
+            if ($asset) {
+                $asset->update(['status' => 'assigned']);
+                \App\Models\AssetAssignment::create([
+                    'asset_id' => $asset->id,
+                    'employee_id' => $emp->id,
+                    'assigned_by' => $activeEmployees->first()->user_id,
+                    'assigned_at' => $now->copy()->subMonths(mt_rand(1, 6)),
+                    'condition_on_handover' => 'Good',
+                    'notes' => 'Assigned for daily work use',
+                ]);
+            }
+        }
+
+        // ====================================================================
+        // 21. TRAVEL REQUESTS (sample)
+        // ====================================================================
+        $travelPurposes = [
+            'Client meeting in New York',
+            'Annual conference attendance',
+            'Site visit to Chicago office',
+            'Training workshop in Boston',
+        ];
+        foreach ($activeEmployees->take(4) as $i => $emp) {
+            $start = $now->copy()->addDays(mt_rand(10, 60));
+            $end = $start->copy()->addDays(mt_rand(1, 5));
+            $travel = \App\Models\TravelRequest::create([
+                'company_id' => $company->id,
+                'employee_id' => $emp->id,
+                'purpose' => $travelPurposes[$i],
+                'destination' => ['New York', 'Chicago', 'San Francisco', 'Boston'][$i],
+                'from_date' => $start,
+                'to_date' => $end,
+                'estimated_cost' => mt_rand(500, 5000) + 0.99,
+                'mode' => ['flight', 'train', 'flight', 'bus'][$i],
+                'status' => ['pending', 'approved', 'approved', 'pending'][$i],
+            ]);
+            \App\Models\TravelItinerary::create([
+                'travel_request_id' => $travel->id,
+                'date' => $start,
+                'time' => '09:00',
+                'activity' => 'Departure',
+                'location' => 'Home',
+                'details' => 'Airport pickup arranged',
+            ]);
+        }
+
+        // ====================================================================
+        // 22. PERFORMANCE REVIEWS (sample)
+        // ====================================================================
+        $ratingScale = \App\Models\RatingScale::create([
+            'company_id' => $company->id,
+            'name' => '5-Point Scale',
+            'min_score' => 1,
+            'max_score' => 5,
+            'description' => 'Standard 5-point performance rating scale: 1=Needs Improvement, 3=Meets Expectations, 5=Outstanding',
+            'status' => 'active',
+        ]);
+        foreach ($activeEmployees->take(3) as $i => $emp) {
+            $review = \App\Models\PerformanceReview::create([
+                'company_id' => $company->id,
+                'employee_id' => $emp->id,
+                'reviewer_id' => $activeEmployees->first()->user_id,
+                'review_period' => 'Q1 2026',
+                'start_date' => $now->copy()->subMonths(3),
+                'end_date' => $now,
+                'due_date' => $now->copy()->addDays(mt_rand(-5, 30)),
+                'overall_rating' => $i === 0 ? null : mt_rand(3, 5),
+                'employee_notes' => $i === 0 ? null : 'I am satisfied with my progress this quarter.',
+                'reviewer_notes' => $i === 0 ? null : 'Good performance overall. Keep up the great work.',
+                'status' => ['pending_self_review', 'completed', 'completed'][$i],
+            ]);
+            if ($i > 0) {
+                \App\Models\PerformanceGoal::create([
+                    'review_id' => $review->id,
+                    'title' => 'Complete project milestones on time',
+                    'target_value' => '100% on-time delivery',
+                    'achieved_value' => '95% achieved',
+                    'self_rating' => 4,
+                    'manager_rating' => 4,
+                ]);
+                \App\Models\PerformanceFeedback::create([
+                    'review_id' => $review->id,
+                    'reviewer_id' => $activeEmployees->first()->user_id,
+                    'comment' => 'Excellent work on the recent project.',
+                    'rating' => 4,
+                ]);
+            }
+        }
+
+        // ====================================================================
+        // 23. TIMESHEETS (sample)
+        // ====================================================================
+        $projects = [];
+        $projectNames = [
+            'Website Redesign', 'Mobile App Development', 'Cloud Migration',
+            'Data Analytics Platform', 'Internal Tools',
+        ];
+        foreach ($projectNames as $pn) {
+            $projects[] = \App\Models\Project::create([
+                'company_id' => $company->id,
+                'name' => $pn,
+                'slug' => Str::slug($pn) . '-' . $company->id,
+                'description' => $pn . ' project',
+                'status' => 'active',
+            ]);
+        }
+
+        $tskEmployees = $activeEmployees->take(5);
+        $taskNames = ['Frontend development', 'Backend API', 'Database optimization', 'UI/UX design', 'Code review', 'Documentation', 'Testing', 'Bug fixes', 'Client meeting', 'Sprint planning'];
+        foreach ($tskEmployees as $emp) {
+            for ($w = 0; $w < 4; $w++) {
+                $weekStart = $now->copy()->subWeeks($w)->startOfWeek();
+                for ($d = 0; $d < 5; $d++) {
+                    $date = $weekStart->copy()->addDays($d);
+                    if ($date->gt($now)) continue;
+                    $proj = $projects[array_rand($projects)];
+                    \App\Models\Timesheet::create([
+                        'company_id' => $company->id,
+                        'employee_id' => $emp->id,
+                        'project_id' => $proj->id,
+                        'date' => $date,
+                        'task_name' => $taskNames[array_rand($taskNames)] . ' - ' . $proj->name,
+                        'total_hours' => mt_rand(4, 9),
+                        'description' => 'Worked on tasks related to ' . $proj->name,
+                        'status' => $w === 0 ? 'pending' : 'approved',
+                        'approved_by' => $w > 0 ? $activeEmployees->first()->user_id : null,
+                        'approved_at' => $w > 0 ? $date->copy()->addDay() : null,
+                    ]);
+                }
+            }
+        }
+
+        // ====================================================================
+        // 24. EXIT MANAGEMENT (sample)
+        // ====================================================================
+        $activeEmp2 = $activeEmployees[5]; // some random employee
+        $resignation = \App\Models\Resignation::create([
+            'company_id' => $company->id,
+            'employee_id' => $activeEmp2->id,
+            'notice_date' => $now->copy()->subDays(15),
+            'last_working_date' => $now->copy()->addDays(15),
+            'reason' => 'Relocating to another city for personal reasons.',
+            'status' => 'pending',
+        ]);
+        \App\Models\ClearanceChecklistItem::create([
+            'resignation_id' => $resignation->id,
+            'department' => 'IT',
+            'item' => 'Return company laptop',
+            'assigned_to' => $activeEmployees->first()->user_id,
+        ]);
+        \App\Models\ClearanceChecklistItem::create([
+            'resignation_id' => $resignation->id,
+            'department' => 'HR',
+            'item' => 'Submit ID card and access badges',
+            'assigned_to' => $activeEmployees->first()->user_id,
+        ]);
+        \App\Models\ClearanceChecklistItem::create([
+            'resignation_id' => $resignation->id,
+            'department' => 'Engineering',
+            'item' => 'Complete handover documentation',
+            'assigned_to' => $activeEmployees->first()->user_id,
+        ]);
 
         $this->command->info('Boom! Demo data seeded successfully! 🎉');
         $this->command->info('');
