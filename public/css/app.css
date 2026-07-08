@@ -4,14 +4,14 @@
     --header-height: 60px;
     --primary-color: #4f46e5;
     --primary-hover: #4338ca;
-    --sidebar-bg: #ffffff;
-    --sidebar-text: #495057;
-    --sidebar-active: #4f46e5;
-    --sidebar-hover: #f1f3f5;
-    --sidebar-submenu-bg: #f8f9fa;
+    --sidebar-bg:  #0F172A;
+    --sidebar-text:  #CBD5E1;
+    --sidebar-active: #2563EB;
+    --sidebar-hover: #1E293B;
+    --sidebar-submenu-bg: #111827;
     --sidebar-brand-border: rgba(0, 0, 0, 0.06);
-    --header-bg: #ffffff;
-    --header-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --header-bg: #0F172A;
+    --header-shadow: none;
     --body-bg: #f5f6fa;
     --card-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
     --border-color: #e8e8ef;
@@ -336,6 +336,7 @@ body {
 /* ========== HEADER ========== */
 .main-header {
     background: var(--header-bg);
+    .header {color: #ffffff;}
     border-bottom: 1px solid var(--border-color);
     padding: 0 1.5rem;
     height: var(--header-height);
@@ -358,7 +359,7 @@ body {
     background: none;
     border: none;
     font-size: 1.35rem;
-    color: var(--text-secondary);
+    color: #ffffff;
     cursor: pointer;
     padding: 0.25rem;
     display: none;
@@ -989,4 +990,22 @@ html[data-bs-theme="dark"] .dataTables_wrapper .dataTables_paginate .page-item.d
     .card-body {
         padding: 1rem;
     }
+}
+/* ===== Dark Header Fix ===== */
+.header .page-title,
+.header .page-title h1,
+.header .page-title h2,
+.header .page-title h3,
+.header .breadcrumb-item,
+.header .breadcrumb-item a {
+    color: #ffffff !important;
+}
+/* Header breadcrumb text color */
+.main-header .breadcrumb-item.active {
+    color: #ffffff !important;
+}
+
+.main-header .breadcrumb-item,
+.main-header .breadcrumb-item a {
+    color: #ffffff !important;
 }

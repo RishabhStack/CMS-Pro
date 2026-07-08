@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', config('app.name'))
+@section('title', 'CMS Pro')
 
 @section('content')
 
@@ -9,13 +9,13 @@
         <div class="row align-items-center min-vh-80 pt-5">
             <div class="col-lg-6" data-aos="fade-right">
                 <span class="badge bg-white text-primary px-3 py-2 mb-3 fs-6 rounded-pill">
-                    <i class="bi bi-rocket-takeoff me-1"></i> Trusted by 10,000+ companies
+                    <i class="bi bi-rocket-takeoff me-1"></i> 🚀 Smart Employee & Company Management
                 </span>
-                <h1 class="display-4 fw-bold mb-3 lh-1">Enterprise HRMS<br>Made <span class="text-warning">Simple</span></h1>
-                <p class="lead mb-4 text-white-80">Manage your entire workforce from one powerful platform. From hiring to payroll, attendance to performance — we've got you covered.</p>
+                <h1 class="display-4 fw-bold mb-3 lh-1">Manage Your Company<br>Smarter with<span class="text-warning"> CMS Pro</span></h1>
+                <p class="lead mb-4 text-white-80">Simplify attendance, payroll, employee records, projects, leave management, and reporting from one centralized platform built for modern businesses.</p>
                 <div class="d-flex flex-wrap gap-3 mb-4">
                     <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-5 fw-semibold">
-                        Start Free Trial <i class="bi bi-arrow-right ms-2"></i>
+                        Get Started <i class="bi bi-arrow-right ms-2"></i>
                     </a>
                     <a href="{{ route('features') }}" class="btn btn-outline-light btn-lg px-5">
                         <i class="bi bi-play-circle me-2"></i>See Features
@@ -31,7 +31,7 @@
                 <div class="position-relative">
                     <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
                         <div class="card-body p-0">
-                            <img src="{{ asset('images/dashboard.png') }}" alt="HRMS Dashboard" class="img-fluid">
+                            <img src="{{ asset('images/dashboard.jpg') }}" alt="HRMS Dashboard" class="img-fluid">
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 translate-middle-y ms-n4">
@@ -267,7 +267,7 @@
 <style>
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+    background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
 }
 .text-white-80 { color: rgba(255,255,255,0.8); }
 .text-purple { color: #7c3aed; }

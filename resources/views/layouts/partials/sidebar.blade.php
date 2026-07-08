@@ -1,10 +1,10 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('dashboard') }}">
-            <div class="brand-icon">
-                <i class="bi bi-building"></i>
+            <div class="brand-icon" style="background:none; width:100%; height:auto;">
+               <img src="{{ asset('images/logo.png') }}" alt="CMS Pro" style="height:32px; width:auto; max-width:170px;">
             </div>
-            <span class="brand-text">{{ $company->short_name ?? config('app.name') }}</span>
+            <span class="brand-text"></span>
         </a>
     </div>
 

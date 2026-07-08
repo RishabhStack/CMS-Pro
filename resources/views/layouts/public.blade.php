@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', config('app.name')) - Enterprise HRMS</title>
+    <title>@yield('title', 'CMS Pro')</title>
     <meta name="description" content="@yield('meta_description', 'Enterprise-grade Human Resource Management System for modern organizations')">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,8 +17,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white border-bottom">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="{{ route('home') }}">
-                <i class="bi bi-building text-primary me-2"></i>{{ config('app.name') }}
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="CMS Pro Logo" height="42" class="me-2">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list fs-3"></i>
@@ -45,7 +45,7 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h5 class="fw-bold mb-3"><i class="bi bi-building text-primary me-2"></i>{{ config('app.name') }}</h5>
+                    <h5 class="fw-bold mb-3"><i class="bi bi-building text-primary me-2"></i>CMS Pro</h5>
                     <p class="text-white-50 small">Enterprise-grade Human Resource Management System designed for modern organizations. Streamline your HR operations with our comprehensive suite of tools.</p>
                     <div class="d-flex gap-2">
                         <a href="#" class="btn btn-outline-light btn-sm btn-icon rounded-circle"><i class="bi bi-linkedin"></i></a>
@@ -98,7 +98,7 @@
             <hr class="my-4 border-white-10">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <small class="text-white-50">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</small>
+                    <small class="text-white-50">&copy; {{ date('Y') }} {{ config('CMS Pro') }}. All rights reserved.</small>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
                     <small class="text-white-50">Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
