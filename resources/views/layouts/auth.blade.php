@@ -21,6 +21,8 @@
                         <img src="{{ asset('images/logo.png') }}"
                              alt="CMS Pro Logo"
                              class="auth-logo">
+                             style="width:60px;height:60px;object-fit:contain;"
+                             class="me-3">
 
                             <h2 class="text-white fw-bold mb-2"><i class="bi bi-building me-2"></i>{{ config('app.name') }}</h2>
                     </div>
