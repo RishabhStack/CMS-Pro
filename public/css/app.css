@@ -1227,3 +1227,94 @@ html[data-bs-theme="dark"] .dataTables_wrapper .dataTables_paginate .page-item.d
         transform: scale(0.85);
     }
 }
+/* Login page alignment fix */
+
+.login-page .auth-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 4rem;
+}
+
+.login-page .auth-form-inner {
+    width: min(100%, 720px);
+    margin: auto;
+    padding: 2.25rem 2.5rem;
+}
+
+.login-page .auth-form-inner form {
+    max-width: 100%;
+}
+
+/* Keep the three demo accounts properly separated */
+.login-page .auth-form-inner .row,
+.login-page .auth-form-inner .d-flex {
+    position: relative;
+    z-index: 2;
+}
+
+/* Move graphics away from the login card */
+.login-page .floating-auth-icon-users {
+    top: 14%;
+    left: 4%;
+}
+
+.login-page .floating-auth-icon-chart {
+    top: 16%;
+    right: 3%;
+}
+
+.login-page .floating-auth-icon-folder {
+    bottom: 12%;
+    left: 4%;
+}
+
+.login-page .floating-auth-icon-wallet {
+    bottom: 10%;
+    right: 3%;
+}
+
+/* Prevent demo credentials from touching each other */
+.login-page .auth-form-inner hr + .row,
+.login-page .auth-form-inner hr + .d-flex {
+    gap: 1rem;
+}
+
+/* Responsive login card */
+@media (max-width: 1400px) {
+    .login-page .auth-form {
+        padding: 2rem;
+    }
+
+    .login-page .auth-form-inner {
+        width: min(100%, 650px);
+        padding: 2rem;
+    }
+
+    .login-page .floating-auth-icon {
+        opacity: 0.45;
+    }
+}
+.login-page .demo-credentials {
+    width: 100%;
+}
+
+.login-page .demo-account-card {
+    min-width: 0;
+    padding: 0.8rem 0.45rem;
+    border-radius: 12px;
+    background: rgba(40, 103, 237, 0.04);
+    border: 1px solid rgba(40, 103, 237, 0.08);
+}
+
+.login-page .demo-account-card small:first-child {
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    .login-page .demo-account-card {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+}

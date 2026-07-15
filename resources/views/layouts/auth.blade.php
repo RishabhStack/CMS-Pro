@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body>
+<body class="@yield('body-class')">
     <div class="auth-wrapper">
         <div class="auth-sidebar d-none d-lg-flex">
             <div class="auth-sidebar-content">

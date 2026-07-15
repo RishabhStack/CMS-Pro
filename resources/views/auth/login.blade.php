@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('body-class', 'login-page')
+
 @section('title', 'Sign In')
 
 @section('content')
@@ -64,22 +66,39 @@
     </p>
 </div>
 
-<div class="mt-4 pt-3 border-top text-center">
-    <div class="row g-2">
-        <div class="col-4">
-            <small class="text-muted d-block fw-medium">owner@example.com</small>
-            <small class="text-muted">Owner</small>
+<div class="mt-4 pt-3 border-top text-center demo-credentials">
+    <div class="row g-3 justify-content-center">
+        <div class="col-12 col-md-4">
+            <div class="demo-account-card">
+                <small class="d-block fw-semibold text-dark">
+                    owner@example.com
+                </small>
+                <small class="text-muted">Owner</small>
+            </div>
         </div>
-        <div class="col-4">
-            <small class="text-muted d-block fw-medium">admin@example.com</small>
-            <small class="text-muted">Admin</small>
+
+        <div class="col-12 col-md-4">
+            <div class="demo-account-card">
+                <small class="d-block fw-semibold text-dark">
+                    admin@example.com
+                </small>
+                <small class="text-muted">Admin</small>
+            </div>
         </div>
-        <div class="col-4">
-            <small class="text-muted d-block fw-medium">employee@example.com</small>
-            <small class="text-muted">Employee</small>
+
+        <div class="col-12 col-md-4">
+            <div class="demo-account-card">
+                <small class="d-block fw-semibold text-dark">
+                    employee@example.com
+                </small>
+                <small class="text-muted">Employee</small>
+            </div>
         </div>
-        <div class="col-12 mt-1">
-            <small class="text-muted fst-italic">Password: <strong>password</strong></small>
+
+        <div class="col-12 mt-2">
+            <small class="text-muted fst-italic">
+                Password: <strong>password</strong>
+            </small>
         </div>
     </div>
 </div>
