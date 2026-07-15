@@ -44,7 +44,7 @@ body {
 
 .auth-sidebar {
     width: 45%;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+    background: linear-gradient(135deg, #2867ED 0%, #4B8EF5 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,32 +53,43 @@ body {
     overflow: hidden;
 }
 
-.auth-sidebar::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -30%;
-    width: 80%;
-    height: 80%;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 50%;
+.auth-sidebar::before{
+    content:"";
+    position:absolute;
+    width:650px;
+    height:650px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    top:-260px;
+    right:-180px;
 }
 
-.auth-sidebar::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -20%;
-    width: 60%;
-    height: 60%;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 50%;
+.auth-sidebar::after{
+    content:"";
+    position:absolute;
+    width:550px;
+    height:550px;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+    bottom:-260px;
+    left:-220px;
 }
 
 .auth-sidebar-content {
     position: relative;
     z-index: 1;
     max-width: 420px;
+}
+
+.auth-sidebar-content::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+    left:-120px;
+    top:120px;
 }
 
 .auth-testimonial {

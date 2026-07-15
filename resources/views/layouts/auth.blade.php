@@ -17,41 +17,57 @@
         <div class="auth-sidebar d-none d-lg-flex">
             <div class="auth-sidebar-content">
                 <div class="mb-5">
-                    <h2 class="text-white fw-bold mb-2"><i class="bi bi-building me-2"></i>{{ config('app.name') }}</h2>
-                    <p class="text-white-50">Enterprise HRMS Platform</p>
+                    <div class="auth-brand d-flex align-items-center gap-3 mb-2">
+                        <img src="{{ asset('images/logo.png') }}"
+                             alt="CMS Pro Logo"
+                             class="auth-logo">
+
+                            <h2 class="text-white fw-bold mb-2"><i class="bi bi-building me-2"></i>{{ config('app.name') }}</h2>
+                    </div>
+
+                    <p class="text-white-50 mb-0">
+                       Company Management System
+                    </p>
                 </div>
                 <div class="auth-testimonial">
                     <div class="mb-4">
-                        <i class="bi bi-quote display-4 text-white-50"></i>
+                        <i class="bi bi-quote display-3 text-white-50"></i>
                     </div>
                     <blockquote class="text-white fs-5 fw-light lh-base mb-4">
-                        "This platform transformed how we manage our people. The automation and insights are game-changing for our HR team."
+                        "Simplify company operations with a centralized platform for employee management, attendance, projects, payroll, and real-time reporting.."
                     </blockquote>
                     <div class="d-flex align-items-center gap-3">
-                        <div class="avatar-circle bg-white text-primary fw-bold">SK</div>
-                        <div>
-                            <p class="text-white fw-semibold mb-0">Sarah Kim</p>
-                            <small class="text-white-50">HR Director, TechCorp</small>
-                        </div>
+                        <div class="avatar-circle bg-white text-primary fw-bold">CP</div>
+
+                            <div>
+                                <p class="text-white fw-semibold mb-0">CMS Pro Team</p>
+                                <small class="text-white-50">
+                                    Smarter company management
+                                </small>
+                            </div>
                     </div>
                 </div>
                 <div class="auth-features mt-5">
                     <div class="d-flex align-items-center gap-3 text-white-50 mb-3">
                         <i class="bi bi-check-circle-fill text-white"></i>
-                        <span>Employee Lifecycle Management</span>
+                        <span>Employee & Department Management</span>
                     </div>
                     <div class="d-flex align-items-center gap-3 text-white-50 mb-3">
                         <i class="bi bi-check-circle-fill text-white"></i>
-                        <span>Automated Payroll Processing</span>
+                        <span>Attendance & Payroll Tracking</span>
                     </div>
                     <div class="d-flex align-items-center gap-3 text-white-50">
                         <i class="bi bi-check-circle-fill text-white"></i>
-                        <span>Real-time Analytics & Reports</span>
+                        <span>Projects, Reports & Analytics</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="auth-form">
+        <div class="auth-form auth-form-decorated">
+            <div class="auth-decoration auth-decoration-one"></div>
+            <div class="auth-decoration auth-decoration-two"></div>
+            <div class="auth-decoration auth-decoration-three"></div>
+
             <div class="auth-form-inner">
                 <div class="text-end mb-4">
                     <a href="{{ route('home') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
