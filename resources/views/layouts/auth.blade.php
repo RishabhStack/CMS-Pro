@@ -17,19 +17,12 @@
         <div class="auth-sidebar d-none d-lg-flex">
             <div class="auth-sidebar-content">
                 <div class="mb-5">
-                    <div class="auth-brand d-flex align-items-center gap-3 mb-2">
-                        <img src="{{ asset('images/logo.png') }}"
-                             alt="CMS Pro"
-                             style="width:60px;height:60px;object-fit:contain;"
-                             class="me-3"> 
+                   <div class="auth-brand d-flex align-items-center gap-3 mb-2">
+                       <img src="{{ asset('images/logo.png') }}"
+                            alt="CMS Pro Logo"
+                            class="auth-brand-logo">
 
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="{{ asset('images/logo.png') }}"
-                                     alt="CMS Pro Logo"
-                                    class="auth-brand-logo">
-
-                                <h2 class="text-white fw-bold mb-0">{{ config('app.name') }}</h2>
-                            </div>
+                        <h2 class="text-white fw-bold mb-0">{{ config('app.name') }}</h2>
                     </div>
 
                     <p class="text-white-50 mb-0">
@@ -41,7 +34,7 @@
                         <i class="bi bi-quote display-3 text-white-50"></i>
                     </div>
                     <blockquote class="text-white fs-5 fw-light lh-base mb-4">
-                        "Simplify company operations with a centralized platform for employee management, attendance, projects, payroll, and real-time reporting.."
+                        "Simplify company operations with a centralized platform for employee management, attendance, projects, payroll, and real-time reporting."
                     </blockquote>
                     <div class="d-flex align-items-center gap-3">
                         <div class="avatar-circle bg-white text-primary fw-bold">CP</div>
