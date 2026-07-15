@@ -23,7 +23,13 @@
                              style="width:60px;height:60px;object-fit:contain;"
                              class="me-3"> 
 
-                            <h2 class="text-white fw-bold mb-2"><i class="bi bi-building me-2"></i>{{ config('app.name') }}</h2>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="{{ asset('images/logo.png') }}"
+                                     alt="CMS Pro Logo"
+                                    class="auth-brand-logo">
+
+                                <h2 class="text-white fw-bold mb-0">{{ config('app.name') }}</h2>
+                            </div>
                     </div>
 
                     <p class="text-white-50 mb-0">
