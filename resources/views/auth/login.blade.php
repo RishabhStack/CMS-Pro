@@ -5,7 +5,9 @@
 @section('content')
 <div class="text-center mb-4">
     <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-inline-flex p-3 mb-3">
-        <i class="bi bi-building fs-2"></i>
+        <img src="{{ asset('images/logo.png') }}"
+             alt="CMS Pro"
+             style="width:42px;height:42px;object-fit:contain;">
     </div>
     <h3 class="fw-bold mb-1">Welcome back</h3>
     <p class="text-muted">Sign in to your account to continue</p>
