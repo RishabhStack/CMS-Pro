@@ -19,10 +19,9 @@
                 <div class="mb-5">
                     <div class="auth-brand d-flex align-items-center gap-3 mb-2">
                         <img src="{{ asset('images/logo.png') }}"
-                             alt="CMS Pro Logo"
-                             class="auth-logo">
+                             alt="CMS Pro"
                              style="width:60px;height:60px;object-fit:contain;"
-                             class="me-3">
+                             class="me-3"> 
 
                             <h2 class="text-white fw-bold mb-2"><i class="bi bi-building me-2"></i>{{ config('app.name') }}</h2>
                     </div>
