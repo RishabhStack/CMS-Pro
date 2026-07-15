@@ -15,7 +15,7 @@
                     <p class="text-muted">We collect information you provide directly to us, including name, email address, phone number, company details, and employment information necessary for HR management purposes.</p>
 
                     <h5 class="fw-bold mb-3 mt-4">2. How We Use Your Information</h5>
-                    <p class="text-muted">We use the collected information to provide and improve our HRMS services, process payroll, manage employee records, comply with legal obligations, and communicate with you about our services.</p>
+                    <p class="text-muted">We use the collected information to provide and improve our CMS Pro services, process payroll, manage employee records, comply with legal obligations, and communicate with you about our services.</p>
 
                     <h5 class="fw-bold mb-3 mt-4">3. Data Security</h5>
                     <p class="text-muted">We implement industry-standard security measures including encryption at rest and in transit, regular security audits, and strict access controls to protect your data.</p>

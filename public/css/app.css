@@ -1016,3 +1016,103 @@ html[data-bs-theme="dark"] .dataTables_wrapper .dataTables_paginate .page-item.d
 .main-header .breadcrumb-item a {
     color: #ffffff !important;
 }
+/* Premium styling for the login/register form side */
+
+.auth-form-decorated {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 12%, rgba(40, 103, 237, 0.12), transparent 24%),
+        radial-gradient(circle at 12% 88%, rgba(75, 142, 245, 0.10), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #f4f7fb 100%);
+}
+
+.auth-form-decorated::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(rgba(40, 103, 237, 0.18) 1px, transparent 1px);
+    background-size: 26px 26px;
+    opacity: 0.18;
+    pointer-events: none;
+}
+
+.auth-form-inner {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 650px);
+    margin: auto;
+    padding: 2rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(40, 103, 237, 0.10);
+    box-shadow:
+        0 24px 60px rgba(30, 64, 175, 0.10),
+        0 8px 24px rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(12px);
+}
+
+.auth-form-inner .form-control,
+.auth-form-inner .input-group-text,
+.auth-form-inner .btn-light {
+    border-color: #dce5f2;
+}
+
+.auth-form-inner .form-control {
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.auth-form-inner .form-control:focus {
+    border-color: #2867ed;
+    box-shadow: 0 0 0 0.22rem rgba(40, 103, 237, 0.12);
+}
+
+.auth-form-inner .btn-primary {
+    background: linear-gradient(135deg, #2867ed 0%, #4b8ef5 100%);
+    border: none;
+    box-shadow: 0 10px 24px rgba(40, 103, 237, 0.20);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form-inner .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(40, 103, 237, 0.28);
+}
+
+.auth-form-inner .bg-primary.bg-opacity-10 {
+    background: linear-gradient(
+        135deg,
+        rgba(40, 103, 237, 0.12),
+        rgba(75, 142, 245, 0.16)
+    ) !important;
+    border: 1px solid rgba(40, 103, 237, 0.10);
+}
+
+.auth-decoration-one {
+    width: 280px;
+    height: 280px;
+    top: -120px;
+    right: -90px;
+    border: 42px solid rgba(40, 103, 237, 0.07);
+}
+
+.auth-decoration-two {
+    width: 210px;
+    height: 210px;
+    left: -100px;
+    bottom: -80px;
+    background: rgba(75, 142, 245, 0.06);
+}
+
+.auth-decoration-three {
+    width: 14px;
+    height: 14px;
+    top: 18%;
+    left: 10%;
+    background: rgba(40, 103, 237, 0.22);
+    box-shadow:
+        38px 42px 0 rgba(40, 103, 237, 0.10),
+        82px 8px 0 rgba(75, 142, 245, 0.12);
+}

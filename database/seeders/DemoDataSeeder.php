@@ -33,8 +33,8 @@ class DemoDataSeeder extends Seeder
         // 1. COMPANY
         // ====================================================================
         $company = Company::create([
-            'name' => 'Milind Corporation',
-            'email' => 'info@milinddaraniya.com',
+            'name' => 'CMS Pro Corporation',
+            'email' => 'rishabhsarvaliya@179@gmail.com',
             'phone' => '+1-555-0100',
             'address' => '123 Business Avenue, Suite 100',
             'city' => 'San Francisco',
@@ -53,7 +53,7 @@ class DemoDataSeeder extends Seeder
         // ====================================================================
         $settings = [
             ['company_logo', null, 'text'],
-            ['company_website', 'https://milinddaraniya.com', 'text'],
+            ['company_website', 'https://github.com/RishabhStack/CMS-Pro', 'text'],
             ['date_format', 'Y-m-d', 'text'],
             ['time_format', 'H:i:s', 'text'],
             ['timezone', 'America/New_York', 'text'],
@@ -610,7 +610,7 @@ class DemoDataSeeder extends Seeder
         // ====================================================================
         $announcements = [
             [
-                'title' => 'Welcome to Milind Corporation!',
+                'title' => 'Welcome to CMS Pro Corporation!',
                 'content' => 'We are excited to have you on board. Please take some time to explore the HRMS portal and familiarize yourself with our policies. If you have any questions, reach out to the HR team.',
                 'type' => 'general',
                 'priority' => 'high',

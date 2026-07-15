@@ -15,7 +15,7 @@
                     <p class="text-muted">By accessing and using {{ config('app.name') }}, you agree to be bound by these Terms of Service. If you do not agree, please do not use our platform.</p>
 
                     <h5 class="fw-bold mb-3 mt-4">2. Description of Service</h5>
-                    <p class="text-muted">{{ config('app.name') }} provides a cloud-based Human Resource Management System (HRMS) that includes employee management, payroll processing, attendance tracking, leave management, and related HR functionalities.</p>
+                    <p class="text-muted">{{ config('app.name') }} provides a cloud-based Company Management System (CMS Pro) that includes employee management, payroll processing, attendance tracking, leave management, and related HR functionalities.</p>
 
                     <h5 class="fw-bold mb-3 mt-4">3. User Responsibilities</h5>
                     <p class="text-muted">You are responsible for maintaining the confidentiality of your account credentials, ensuring accurate data entry, and complying with all applicable laws regarding employee data and privacy.</p>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'CMS Pro')</title>
-    <meta name="description" content="@yield('meta_description', 'Enterprise-grade Human Resource Management System for modern organizations')">
+    <meta name="description" content="@yield('meta_description', 'Modern Company Management Platform')">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3"><i class="bi bi-building text-primary me-2"></i>CMS Pro</h5>
-                    <p class="text-white-50 small">Enterprise-grade Human Resource Management System designed for modern organizations. Streamline your HR operations with our comprehensive suite of tools.</p>
+                    <p class="text-white-50 small">Modern Company Management Platform designed for modern organizations. Streamline your HR operations with our comprehensive suite of tools.</p>
                     <div class="d-flex gap-2">
                         <a href="#" class="btn btn-outline-light btn-sm btn-icon rounded-circle"><i class="bi bi-linkedin"></i></a>
                         <a href="#" class="btn btn-outline-light btn-sm btn-icon rounded-circle"><i class="bi bi-twitter-x"></i></a>
@@ -101,7 +101,7 @@
                     <small class="text-white-50">&copy; {{ date('Y') }} {{ config('CMS Pro') }}. All rights reserved.</small>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
-                    <small class="text-white-50">Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
+                    <small class="text-white-50">Developed by <a href="https://github.com/RishabhStack/CMS-Pro" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Rishabh • Darshil • Henil</a></small>
                 </div>
             </div>
         </div>

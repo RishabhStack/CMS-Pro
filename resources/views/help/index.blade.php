@@ -6,7 +6,7 @@
 <div class="row mb-4">
     <div class="col-12">
         <h4 class="fw-bold">Help & Documentation</h4>
-        <p class="text-muted">Complete guide to all HRMS modules and features.</p>
+        <p class="text-muted">Complete guide to all CMS Pro modules.</p>
     </div>
 </div>
 

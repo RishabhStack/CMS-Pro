@@ -31,7 +31,7 @@
                 <div class="position-relative">
                     <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
                         <div class="card-body p-0">
-                            <img src="{{ asset('images/dashboard.jpg') }}" alt="HRMS Dashboard" class="img-fluid">
+                            <img src="{{ asset('images/dashboard.jpg') }}" alt="CMS Pro Dashboard" class="img-fluid">
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 translate-middle-y ms-n4">
@@ -258,7 +258,7 @@
 
 <section class="py-3 bg-dark text-white text-center">
     <div class="container">
-        <small>Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
+        <small>Developed by <a href="https://github.com/RishabhStack/CMS-Pro" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Rishabh • Darshil • Henil</a></small>
     </div>
 </section>
 @endsection

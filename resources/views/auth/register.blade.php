@@ -21,7 +21,7 @@
         <div class="row g-3">
             <div class="col-md-6">
                 <label for="company_name" class="form-label small fw-medium">Company Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') }}" required placeholder="Milind Inc.">
+                <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') }}" required placeholder="CMS Pro inc .">
                 @error('company_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="col-md-6">

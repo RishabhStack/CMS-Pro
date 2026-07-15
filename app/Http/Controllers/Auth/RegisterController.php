@@ -100,7 +100,7 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Company registered successfully! Welcome to HRMS.',
+                'message' => 'Company registered successfully! Welcome to CMS Pro.',
                 'redirect' => route('dashboard')
             ]);
         } catch (\Exception $e) {

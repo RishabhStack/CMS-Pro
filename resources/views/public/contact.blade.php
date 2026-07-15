@@ -90,7 +90,7 @@
 
 <section class="py-3 bg-dark text-white text-center">
     <div class="container">
-        <small>Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Milind Daraniya</a></small>
+        <small>Developed by <a href="https://milinddaraniya.com" target="_blank" rel="noopener" class="text-white text-decoration-none fw-semibold">Rishabh • Darshil • Henil</a></small>
     </div>
 </section>
 @endsection
