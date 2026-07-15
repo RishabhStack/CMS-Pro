@@ -64,9 +64,26 @@
             </div>
         </div>
         <div class="auth-form auth-form-decorated">
+
             <div class="auth-decoration auth-decoration-one"></div>
             <div class="auth-decoration auth-decoration-two"></div>
             <div class="auth-decoration auth-decoration-three"></div>
+
+            <div class="floating-auth-icon floating-auth-icon-users">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div class="floating-auth-icon floating-auth-icon-chart">
+                <i class="bi bi-bar-chart-line"></i>
+            </div>
+
+            <div class="floating-auth-icon floating-auth-icon-folder">
+                <i class="bi bi-folder2-open"></i>
+            </div>
+
+            <div class="floating-auth-icon floating-auth-icon-wallet">
+               <i class="bi bi-wallet2"></i>
+            </div>
 
             <div class="auth-form-inner">
                 <div class="text-end mb-4">
@@ -74,9 +91,14 @@
                         <i class="bi bi-arrow-left me-1"></i> Back to Home
                     </a>
                 </div>
+
                 @yield('content')
-                <p class="text-center text-muted small mt-5 mb-0">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+
+                <p class="text-center text-muted small mt-5 mb-0">
+                    &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+                </p>
             </div>
+
         </div>
     </div>
 
